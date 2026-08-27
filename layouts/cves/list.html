@@ -1,4 +1,5 @@
 {{ define "main" }}
+<div class="cve-wrap">
 <div class="page-heading">
   <h1><span class="prompt">$</span> ls -la ./cves/</h1>
   <p class="sub">{{ len hugo.Data.cves }} vulnerabilities disclosed</p>
@@ -17,7 +18,7 @@
   <tbody>
     {{ range hugo.Data.cves }}
     {{ $link := .advisory | default .blog_ref }}
-    <tr {{ if $link }}class="cve-row-link" onclick="location.href='{{ $link }}'" tabindex="0"{{ end }}>
+    <tr {{ if $link }}class="cve-row-link" onclick="window.open('{{ $link }}','_blank')" tabindex="0"{{ end }}>
       <td>
         {{ if $link }}
         <a href="{{ $link }}" target="_blank" rel="noopener" class="cve-id" onclick="event.stopPropagation()">{{ .id }}</a>
@@ -33,4 +34,5 @@
     {{ end }}
   </tbody>
 </table>
+</div>
 {{ end }}

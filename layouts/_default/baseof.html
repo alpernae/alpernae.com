@@ -5,12 +5,12 @@
 </head>
 <body>
   {{ partial "nav.html" . }}
-  <main class="wrap">
+  <main>
     {{ block "main" . }}{{ end }}
   </main>
   <footer>
     <div class="wrap">
-      <span class="prompt">$</span> © {{ now.Format "2006" }} alpernae · all rights reserved
+      <span class="prompt">$</span> © {{ now.Format "2006" }} alpernae · all rights reserved · <a href="mailto:hey@alpernae.com" class="footer-mail">hey@alpernae.com</a>
     </div>
   </footer>
   {{ partial "music-player.html" . }}

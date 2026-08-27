@@ -3,11 +3,20 @@
 # advisory: link to external advisory (NVD, vendor, HackerOne report, etc.)
 # blog_ref: path to your internal blog post e.g. /blog/my-writeup
 
-- id: "CVE-2024-12345"
-  vendor: "Acme / Widget Pro"
-  type: "SSRF"
+- id: "CVE-2024-40422"
+  vendor: "Devika v1"
+  type: "Path Traversal"
+  severity: "critical"
+  cvss: "9.1"
+  description: "Unauthenticated path traversal via snapshot_path in /api/get-browser-snapshot allows arbitrary file read."
+  advisory: "https://www.cve.org/CVERecord?id=CVE-2024-40422"
+  blog_ref: "/blog/cve-2024-40422-devika-path-traversal"
+
+- id: "CVE-2022-28132"
+  vendor: "T-Soft E-Commerce 4"
+  type: "SQLi"
   severity: "high"
-  cvss: "8.1"
-  description: "Server-side request forgery via unchecked redirect parameter."
-  advisory: "https://hackerone.com/reports/..."
-  blog_ref: "/blog/my-writeup"
+  cvss: "7.2"
+  description: "Authenticated SQL injection allows admin-level attackers to access and manipulate the database via crafted requests."
+  advisory: "https://www.cve.org/CVERecord?id=CVE-2022-28132"
+  blog_ref: ""

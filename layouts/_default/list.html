@@ -1,12 +1,18 @@
 {{ define "main" }}
+<div class="wrap">
 <div class="page-heading">
   <h1><span class="prompt">$</span> cat ./blog/index.md</h1>
   <p class="sub">writeups · research · notes</p>
 </div>
 
-<ul class="blog-list">
+<div class="blog-search-wrap">
+  <span class="blog-search-prompt">grep -i</span>
+  <input class="blog-search" id="blog-search" type="text" placeholder="search posts…" autocomplete="off" spellcheck="false">
+</div>
+
+<ul class="blog-list" id="blog-list">
   {{ range .Pages }}
-  <li class="blog-item">
+  <li class="blog-item" data-title="{{ lower .Title }}" data-tags="{{ lower (delimit (.Params.tags | default slice) " ") }}">
     <span class="blog-date">{{ .Date.Format "2006-01-02" }}</span>
     <div>
       <a href="{{ .RelPermalink }}" class="blog-title">{{ .Title }}</a>
@@ -21,4 +27,15 @@
   </li>
   {{ end }}
 </ul>
+</div>
+
+<script>
+document.getElementById('blog-search').addEventListener('input', function() {
+  var q = this.value.toLowerCase().trim();
+  document.querySelectorAll('#blog-list .blog-item').forEach(function(el) {
+    var match = !q || el.dataset.title.includes(q) || el.dataset.tags.includes(q);
+    el.style.display = match ? '' : 'none';
+  });
+});
+</script>
 {{ end }}

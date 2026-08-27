@@ -1,13 +1,51 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} · {{ .Site.Title }}{{ end }}</title>
-<meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{ .Site.Params.description }}{{ end }}">
+
+<!-- title -->
+<title>{{ if .IsHome }}{{ .Site.Title }} · application security researcher{{ else }}{{ .Title }} · {{ .Site.Title }}{{ end }}</title>
+
+<!-- description -->
+{{ $desc := "" }}
+{{ if .Description }}{{ $desc = .Description }}
+{{ else if .IsPage }}{{ $desc = .Summary | plainify | truncate 160 }}
+{{ else }}{{ $desc = .Site.Params.description }}{{ end }}
+<meta name="description" content="{{ $desc }}">
+
+<!-- keywords -->
+{{ if .Params.tags }}
+<meta name="keywords" content="{{ delimit .Params.tags ", " }}, CVE, security research, bug bounty, exploit, alpernae">
+{{ else }}
+<meta name="keywords" content="CVE, security research, bug bounty, exploit development, path traversal, RCE, XSS, SQLi, IDOR, alpernae, application security, penetration testing">
+{{ end }}
+
 <meta name="author" content="alpernae">
-<meta property="og:title" content="{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} · {{ .Site.Title }}{{ end }}">
-<meta property="og:description" content="{{ with .Description }}{{ . }}{{ else }}{{ .Site.Params.description }}{{ end }}">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="{{ .Permalink }}">
+
+<!-- open graph -->
+<meta property="og:site_name" content="{{ .Site.Title }}">
+<meta property="og:title" content="{{ if .IsHome }}{{ .Site.Title }} · application security researcher{{ else }}{{ .Title }}{{ end }}">
+<meta property="og:description" content="{{ $desc }}">
 <meta property="og:type" content="{{ if .IsPage }}article{{ else }}website{{ end }}">
-<link rel="stylesheet" href="/css/style.css">
+<meta property="og:url" content="{{ .Permalink }}">
+{{ if .IsPage }}
+<meta property="article:published_time" content="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}">
+<meta property="article:author" content="alpernae">
+{{ with .Params.tags }}{{ range . }}<meta property="article:tag" content="{{ . }}">{{ end }}{{ end }}
+{{ end }}
+
+<!-- twitter card -->
+<meta name="twitter:card" content="summary">
+<meta name="twitter:site" content="@alpernae">
+<meta name="twitter:creator" content="@alpernae">
+<meta name="twitter:title" content="{{ if .IsHome }}{{ .Site.Title }} · application security researcher{{ else }}{{ .Title }}{{ end }}">
+<meta name="twitter:description" content="{{ $desc }}">
+
+<!-- favicon -->
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%230a0a0a'/><text x='3' y='23' font-family='monospace' font-size='18' fill='%2300ff41'>$_</text></svg>">
-<script>
-(function(){var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);})();
-</script>
+
+<!-- stylesheet -->
+<link rel="stylesheet" href="/css/style.css">
+
+<!-- theme init (no flash) -->
+<script>(function(){var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);})();</script>

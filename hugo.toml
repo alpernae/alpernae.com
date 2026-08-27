@@ -3,11 +3,12 @@ locale = "en-us"
 title = "alpernae"
 
 [params]
-  description = "security researcher · CVE hunter · bug bounty"
+  description = "Application security researcher and bug bounty hunter. Public CVEs, exploit PoCs, and security writeups."
   github    = "https://github.com/alpernae"
   twitter   = "https://x.com/alpernae"
   hackerone = "https://hackerone.com/alpernae"
   linkedin  = "https://linkedin.com/in/alpernae"
+  exploitdb = "https://www.exploit-db.com/?author=10463"
 
 [markup.goldmark.renderer]
   unsafe = true

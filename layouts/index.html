@@ -1,4 +1,5 @@
 {{ define "main" }}
+<div class="wrap">
 <div class="hero">
   <h1 class="hero-name" id="hero-name"><span>a</span><span>l</span><span>p</span><span>e</span><span>r</span><span>n</span><span>a</span><span>e</span><span class="cursor"></span></h1>
   <p class="hero-sub">Application Security Researcher</p>
@@ -18,9 +19,9 @@ document.querySelectorAll('#hero-name span:not(.cursor)').forEach(function(s) {
 </script>
 
 <p class="bio">
-  <span class="prompt">$</span> security researcher &amp; bug bounty hunter.<br>
-  hunting vulnerabilities, writing exploits, and building security tools.<br>
-  CTF player · public CVEs · occasional writeups.
+  <span class="prompt">$</span> application security researcher, part-time bug bounty hunter.<br>
+  i break things, find what shouldn't be there, and build tools to do it faster.<br>
+  disclosed CVEs · bug bounty · CTFs · ships tools when the itch gets bad enough.
 </p>
 
 <div class="tags">
@@ -57,6 +58,12 @@ document.querySelectorAll('#hero-name span:not(.cursor)').forEach(function(s) {
     linkedin
   </a>
   {{ end }}
+  {{ with .Site.Params.exploitdb }}
+  <a href="{{ . }}" target="_blank" rel="noopener">
+    <img src="https://www.exploit-db.com/images/spider-white.png" alt="" aria-hidden="true" width="16" height="16" style="object-fit:contain;flex-shrink:0">
+    exploit-db
+  </a>
+  {{ end }}
 </div>
 
 {{ $posts := where .Site.RegularPages "Section" "blog" }}
@@ -71,4 +78,5 @@ document.querySelectorAll('#hero-name span:not(.cursor)').forEach(function(s) {
   {{ end }}
 </ul>
 {{ end }}
+</div>
 {{ end }}
