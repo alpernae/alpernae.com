@@ -1,0 +1,18 @@
+baseURL = "https://alpernae.com/"
+locale = "en-us"
+title = "alpernae"
+
+[params]
+  description = "security researcher · CVE hunter · bug bounty"
+  github    = "https://github.com/alpernae"
+  twitter   = "https://x.com/alpernae"
+  hackerone = "https://hackerone.com/alpernae"
+  linkedin  = "https://linkedin.com/in/alpernae"
+
+[markup.goldmark.renderer]
+  unsafe = true
+
+[markup.highlight]
+  style            = "monokai"
+  lineNos          = true
+  lineNumbersInTable = false

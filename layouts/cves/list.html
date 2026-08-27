@@ -1,0 +1,36 @@
+{{ define "main" }}
+<div class="page-heading">
+  <h1><span class="prompt">$</span> ls -la ./cves/</h1>
+  <p class="sub">{{ len hugo.Data.cves }} vulnerabilities disclosed</p>
+</div>
+
+<table class="cve-table">
+  <thead>
+    <tr>
+      <th>CVE ID</th>
+      <th>vendor / product</th>
+      <th>type</th>
+      <th>severity</th>
+      <th>description</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{ range hugo.Data.cves }}
+    {{ $link := .advisory | default .blog_ref }}
+    <tr {{ if $link }}class="cve-row-link" onclick="location.href='{{ $link }}'" tabindex="0"{{ end }}>
+      <td>
+        {{ if $link }}
+        <a href="{{ $link }}" target="_blank" rel="noopener" class="cve-id" onclick="event.stopPropagation()">{{ .id }}</a>
+        {{ else }}
+        <span class="cve-id">{{ .id }}</span>
+        {{ end }}
+      </td>
+      <td>{{ .vendor }}</td>
+      <td class="cve-type">{{ .type }}</td>
+      <td><span class="sev sev-{{ lower .severity }}">{{ upper .severity }}&nbsp;{{ .cvss }}</span></td>
+      <td class="cve-desc">{{ .description }}</td>
+    </tr>
+    {{ end }}
+  </tbody>
+</table>
+{{ end }}

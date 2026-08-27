@@ -1,0 +1,66 @@
+<div id="music-bar">
+  <div id="music-inner">
+    <span id="music-icon">♪</span>
+    <span id="music-label">background.radio</span>
+    <div id="music-controls">
+      <button class="music-skip" onclick="prevTrack()" aria-label="Previous">◀◀</button>
+      <button id="music-btn" onclick="toggleMusic()" aria-label="Play/stop music">▶ play</button>
+      <button class="music-skip" onclick="nextTrack()" aria-label="Next">▶▶</button>
+      <input type="range" id="music-vol" min="0" max="100" value="40"
+             oninput="setVol(this.value)" aria-label="Volume">
+    </div>
+  </div>
+</div>
+
+<div id="yt-container" style="position:fixed;left:-9999px;top:-9999px;width:1px;height:1px;overflow:hidden"></div>
+
+<script>
+var ytPlayer = null;
+var playing  = false;
+
+window.onYouTubeIframeAPIReady = function() {
+  ytPlayer = new YT.Player('yt-container', {
+    width: 1, height: 1,
+    playerVars: { autoplay: 0, controls: 0, modestbranding: 1 },
+    events: {
+      onReady: function(e) {
+        e.target.setVolume(40);
+        e.target.cuePlaylist({list: 'PLZFIL4WtCxxU', listType: 'playlist', index: 0});
+      },
+      onError: function(e) {
+        document.getElementById('music-label').textContent = 'playlist unavailable — set to public/unlisted on youtube';
+      }
+    }
+  });
+};
+
+(function() {
+  var s = document.createElement('script');
+  s.src = 'https://www.youtube.com/iframe_api';
+  document.head.appendChild(s);
+})();
+
+function toggleMusic() {
+  if (!ytPlayer || typeof ytPlayer.playVideo !== 'function') {
+    document.getElementById('music-label').textContent = 'loading…';
+    return;
+  }
+  if (!playing) {
+    ytPlayer.playVideo();
+    document.getElementById('music-btn').textContent   = '■ stop';
+    document.getElementById('music-label').textContent = 'background.radio — live';
+    playing = true;
+  } else {
+    ytPlayer.pauseVideo();
+    document.getElementById('music-btn').textContent   = '▶ play';
+    document.getElementById('music-label').textContent = 'background.radio';
+    playing = false;
+  }
+}
+
+function setVol(v) { if (ytPlayer && ytPlayer.setVolume) ytPlayer.setVolume(parseInt(v)); }
+
+function prevTrack() { if (ytPlayer && ytPlayer.previousVideo) { ytPlayer.previousVideo(); playing = true; document.getElementById('music-btn').textContent = '■ stop'; document.getElementById('music-label').textContent = 'background.radio — live'; } }
+
+function nextTrack() { if (ytPlayer && ytPlayer.nextVideo) { ytPlayer.nextVideo(); playing = true; document.getElementById('music-btn').textContent = '■ stop'; document.getElementById('music-label').textContent = 'background.radio — live'; } }
+</script>

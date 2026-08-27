@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  {{ partial "head.html" . }}
+</head>
+<body>
+  {{ partial "nav.html" . }}
+  <main class="wrap">
+    {{ block "main" . }}{{ end }}
+  </main>
+  <footer>
+    <div class="wrap">
+      <span class="prompt">$</span> © {{ now.Format "2006" }} alpernae · all rights reserved
+    </div>
+  </footer>
+  {{ partial "music-player.html" . }}
+</body>
+</html>

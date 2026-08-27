@@ -1,0 +1,27 @@
+<nav>
+  <div class="wrap inner">
+    <a href="/" class="nav-logo">root@alpernae.com:~$<span class="cursor"></span></a>
+    <div class="nav-right">
+      <ul class="nav-links">
+        <li><a href="/"         {{ if .IsHome }}class="active"{{ end }}>~/home</a></li>
+        <li><a href="/cves"     {{ if eq .Section "cves" }}class="active"{{ end }}>~/cves</a></li>
+        <li><a href="/blog"     {{ if eq .Section "blog" }}class="active"{{ end }}>~/blog</a></li>
+        <li><a href="/exploits" {{ if eq .Section "exploits" }}class="active"{{ end }}>~/exploits</a></li>
+      </ul>
+      <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle light/dark mode" title="Toggle theme">
+        <span class="theme-icon-dark">◐</span>
+        <span class="theme-icon-light">◑</span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<script>
+function toggleTheme() {
+  var html = document.documentElement;
+  var current = html.getAttribute('data-theme');
+  var next = current === 'light' ? 'dark' : 'light';
+  html.setAttribute('data-theme', next);
+  localStorage.setItem('theme', next);
+}
+</script>

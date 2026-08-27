@@ -1,0 +1,24 @@
+{{ define "main" }}
+<div class="page-heading">
+  <h1><span class="prompt">$</span> cat ./blog/index.md</h1>
+  <p class="sub">writeups · research · notes</p>
+</div>
+
+<ul class="blog-list">
+  {{ range .Pages }}
+  <li class="blog-item">
+    <span class="blog-date">{{ .Date.Format "2006-01-02" }}</span>
+    <div>
+      <a href="{{ .RelPermalink }}" class="blog-title">{{ .Title }}</a>
+      {{ with .Summary }}<p class="blog-excerpt">{{ . | plainify | truncate 120 }}</p>{{ end }}
+      <div class="post-tags">
+        {{ range .Params.tags }}
+        <span class="post-tag {{ . }}">{{ . }}</span>
+        {{ end }}
+      </div>
+    </div>
+    <span class="read-time">{{ .ReadingTime }} min</span>
+  </li>
+  {{ end }}
+</ul>
+{{ end }}

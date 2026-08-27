@@ -1,0 +1,13 @@
+# Add your CVEs here — they render automatically on /cves
+# severity: critical | high | medium | low
+# advisory: link to external advisory (NVD, vendor, HackerOne report, etc.)
+# blog_ref: path to your internal blog post e.g. /blog/my-writeup
+
+- id: "CVE-2024-12345"
+  vendor: "Acme / Widget Pro"
+  type: "SSRF"
+  severity: "high"
+  cvss: "8.1"
+  description: "Server-side request forgery via unchecked redirect parameter."
+  advisory: "https://hackerone.com/reports/..."
+  blog_ref: "/blog/my-writeup"
