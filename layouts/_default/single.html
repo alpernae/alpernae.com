@@ -25,6 +25,10 @@
     <a href="https://twitter.com/intent/tweet?url={{ .Permalink | urlize }}&text={{ .Title | urlize }}" target="_blank" rel="noopener" class="share-btn">x / twitter</a>
     <a href="https://www.linkedin.com/sharing/share-offsite/?url={{ .Permalink | urlize }}" target="_blank" rel="noopener" class="share-btn">linkedin</a>
   </div>
+  <nav class="post-nav">
+    {{ with .PrevInSection }}<a href="{{ .RelPermalink }}" class="post-nav-btn">← {{ .Title }}</a>{{ else }}<span></span>{{ end }}
+    {{ with .NextInSection }}<a href="{{ .RelPermalink }}" class="post-nav-btn">{{ .Title }} →</a>{{ end }}
+  </nav>
 </article>
 </div>
 {{ end }}

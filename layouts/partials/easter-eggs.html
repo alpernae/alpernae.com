@@ -1,0 +1,149 @@
+<script>
+var _eseq = '';
+document.addEventListener('keydown', function(e) {
+  if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+  if (document.getElementById('snake-overlay') || document.getElementById('sudo-overlay')) return;
+  _eseq = (_eseq + e.key).slice(-10);
+  if (_eseq.endsWith('sudo')) { _eseq = ''; showSudo(); }
+  if (_eseq.endsWith('snake')) { _eseq = ''; showSnake(); }
+});
+
+function showSudo() {
+  var overlay = document.createElement('div');
+  overlay.id = 'sudo-overlay';
+  overlay.style.cssText = 'position:fixed;inset:0;background:#0d0d0d;z-index:9999;font-family:monospace;font-size:14px;color:#00ff41;padding:40px;overflow:hidden;cursor:default;';
+  var term = document.createElement('div');
+  overlay.appendChild(term);
+  document.body.appendChild(overlay);
+
+  var lines = [
+    '$ sudo rm -rf /',
+    '[sudo] password for alpernae: ••••••••',
+    'rm: removing /boot ...',
+    'rm: removing /etc ...',
+    'rm: removing /home ...',
+    'rm: removing /usr ...',
+    'rm: removing /var ...',
+    'rm: removing /lib ...',
+    'rm: removing /bin ...',
+    "rm: it's gone. all of it.",
+    '',
+    'Kernel panic — not syncing: Attempted to kill init!',
+    '',
+    'rebooting in 3...',
+    'rebooting in 2...',
+    'rebooting in 1...',
+  ];
+
+  var i = 0;
+  function next() {
+    if (i >= lines.length) {
+      setTimeout(function() { overlay.remove(); location.reload(); }, 600);
+      return;
+    }
+    var p = document.createElement('p');
+    p.style.margin = '3px 0';
+    p.textContent = lines[i];
+    if (lines[i].includes('Kernel panic')) p.style.color = '#ff4141';
+    if (lines[i].includes('rebooting')) p.style.color = '#888';
+    term.appendChild(p);
+    overlay.scrollTop = overlay.scrollHeight;
+    i++;
+    setTimeout(next, i <= 2 ? 700 : 220);
+  }
+  next();
+}
+
+function showSnake() {
+  var COLS = 25, ROWS = 20, CELL = 18, SPEED = 120;
+
+  var overlay = document.createElement('div');
+  overlay.id = 'snake-overlay';
+  overlay.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.93);z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:monospace;';
+
+  var hdr = document.createElement('div');
+  hdr.style.cssText = 'color:#00ff41;margin-bottom:10px;font-size:13px;';
+  hdr.textContent = '$ snake --play   [arrows] move   [R] restart   [ESC] quit';
+
+  var scoreEl = document.createElement('div');
+  scoreEl.style.cssText = 'color:#555;margin-bottom:8px;font-size:12px;';
+  scoreEl.textContent = 'score: 0';
+
+  var canvas = document.createElement('canvas');
+  canvas.width = COLS * CELL;
+  canvas.height = ROWS * CELL;
+  canvas.style.cssText = 'border:1px solid #333;display:block;';
+
+  overlay.appendChild(hdr);
+  overlay.appendChild(scoreEl);
+  overlay.appendChild(canvas);
+  document.body.appendChild(overlay);
+
+  var ctx = canvas.getContext('2d');
+  var snake, dir, nextDir, food, score, running, interval;
+
+  function rnd() { return {x: Math.floor(Math.random()*COLS), y: Math.floor(Math.random()*ROWS)}; }
+
+  function init() {
+    snake = [{x:12,y:10},{x:11,y:10},{x:10,y:10}];
+    dir = {x:1,y:0}; nextDir = {x:1,y:0};
+    food = rnd(); score = 0; running = true;
+    scoreEl.textContent = 'score: 0';
+    if (interval) clearInterval(interval);
+    interval = setInterval(step, SPEED);
+    draw();
+  }
+
+  function draw() {
+    ctx.fillStyle = '#0d0d0d';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = '#ff4141';
+    ctx.fillRect(food.x*CELL+2, food.y*CELL+2, CELL-4, CELL-4);
+    snake.forEach(function(s, i) {
+      ctx.fillStyle = i === 0 ? '#00ff41' : '#00882b';
+      ctx.fillRect(s.x*CELL+1, s.y*CELL+1, CELL-2, CELL-2);
+    });
+  }
+
+  function step() {
+    if (!running) return;
+    dir = nextDir;
+    var head = {x: snake[0].x + dir.x, y: snake[0].y + dir.y};
+    if (head.x < 0 || head.x >= COLS || head.y < 0 || head.y >= ROWS ||
+        snake.some(function(s){ return s.x===head.x && s.y===head.y; })) {
+      gameOver(); return;
+    }
+    snake.unshift(head);
+    if (head.x === food.x && head.y === food.y) {
+      score++; scoreEl.textContent = 'score: ' + score; food = rnd();
+    } else { snake.pop(); }
+    draw();
+  }
+
+  function gameOver() {
+    running = false; clearInterval(interval);
+    ctx.fillStyle = 'rgba(0,0,0,0.75)';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.textAlign = 'center';
+    ctx.fillStyle = '#ff4141'; ctx.font = 'bold 15px monospace';
+    ctx.fillText('game over', canvas.width/2, canvas.height/2 - 14);
+    ctx.fillStyle = '#00ff41'; ctx.font = '13px monospace';
+    ctx.fillText('score: ' + score, canvas.width/2, canvas.height/2 + 8);
+    ctx.fillStyle = '#555'; ctx.font = '11px monospace';
+    ctx.fillText('[R] restart   [ESC] quit', canvas.width/2, canvas.height/2 + 28);
+  }
+
+  function onKey(e) {
+    var dirs = {ArrowUp:{x:0,y:-1},ArrowDown:{x:0,y:1},ArrowLeft:{x:-1,y:0},ArrowRight:{x:1,y:0}};
+    if (dirs[e.key]) {
+      var d = dirs[e.key];
+      if (!(d.x === -dir.x && d.y === -dir.y)) nextDir = d;
+      e.preventDefault();
+    }
+    if (e.key === 'Escape') { clearInterval(interval); overlay.remove(); document.removeEventListener('keydown', onKey); }
+    if ((e.key === 'r' || e.key === 'R') && !running) init();
+  }
+  document.addEventListener('keydown', onKey);
+  init();
+}
+</script>
