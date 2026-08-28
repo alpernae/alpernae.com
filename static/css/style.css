@@ -733,13 +733,67 @@ body::after {
 [data-theme="light"] body::after { opacity: 0; }
 
 /* ── responsive ── */
-@media (max-width: 600px) {
-  .ascii-art { font-size: 7px; }
-  .blog-item { grid-template-columns: 1fr; gap: 4px; }
-  .blog-date { display: none; }
+/* ── responsive ── */
+@media (max-width: 768px) {
+  /* nav */
+  nav .inner { flex-direction: column; align-items: flex-start; gap: 12px; }
+  .nav-right { width: 100%; justify-content: space-between; }
+  .nav-links { gap: 16px; }
+
+  /* layout */
+  .wrap { padding: 0 16px; }
+  .cve-wrap { padding: 0 16px; }
+
+  /* hero */
+  .hero-name { font-size: 42px; }
+
+  /* bio & tags */
+  .bio { font-size: 13px; }
+  .socials { gap: 14px; margin-bottom: 36px; }
+
+  /* blog list */
+  .blog-item { flex-direction: column; gap: 4px; align-items: flex-start; }
+  .blog-date { font-size: 11px; }
   .read-time { display: none; }
-  .cve-table th:nth-child(3),
-  .cve-table td:nth-child(3) { display: none; }
-  nav .inner { flex-direction: column; gap: 10px; }
-  .nav-right { flex-direction: row; }
+
+  /* exploit list */
+  .exploit-item { flex-direction: column; gap: 4px; align-items: flex-start; }
+
+  /* CVE table — hide type + severity columns, keep id/vendor/description */
+  .cve-table { table-layout: auto; }
+  .cve-table th:nth-child(3), .cve-table td:nth-child(3),
+  .cve-table th:nth-child(4), .cve-table td:nth-child(4) { display: none; }
+  .cve-table th:nth-child(1), .cve-table td:nth-child(1) { width: auto; }
+  .cve-table th:nth-child(2), .cve-table td:nth-child(2) { width: auto; }
+
+  /* exploit card */
+  .exploit-card { flex-direction: column; }
+  .exploit-actions { flex-direction: row; flex-wrap: wrap; gap: 8px; }
+
+  /* post */
+  .post-content { max-width: 100%; }
+  .post-nav { flex-direction: column; gap: 10px; }
+  .post-nav-btn { max-width: 100%; }
+  .post-share { flex-wrap: wrap; }
+
+  /* music bar */
+  #music-bar { padding: 6px 12px; }
+  #music-label { max-width: 120px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  #music-vol { width: 60px; }
+
+  /* search */
+  .blog-search { width: 100%; }
+  .blog-search-wrap { flex-wrap: wrap; }
+
+  /* ascii */
+  .ascii-art { font-size: 7px; }
+}
+
+@media (max-width: 480px) {
+  .hero-name { font-size: 32px; }
+  .nav-links { gap: 10px; }
+  .nav-links a { font-size: 12px; }
+  .nav-logo { font-size: 13px; }
+  #music-label { display: none; }
+  .cve-table th:nth-child(2), .cve-table td:nth-child(2) { display: none; }
 }
