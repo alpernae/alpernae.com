@@ -3,7 +3,7 @@ var _eseq = '';
 document.addEventListener('keydown', function(e) {
   if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
   if (document.getElementById('snake-overlay') || document.getElementById('sudo-overlay')) return;
-  _eseq = (_eseq + e.key).slice(-10);
+  _eseq = (_eseq + e.key.toLowerCase()).slice(-10);
   if (_eseq.endsWith('sudo')) { _eseq = ''; showSudo(); }
   if (_eseq.endsWith('snake')) { _eseq = ''; showSnake(); }
 });
