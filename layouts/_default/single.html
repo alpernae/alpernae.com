@@ -20,6 +20,11 @@
   <div class="post-content">
     {{ .Content }}
   </div>
+  <div class="post-share">
+    <span class="prompt">$</span> share
+    <a href="https://twitter.com/intent/tweet?url={{ .Permalink | urlize }}&text={{ .Title | urlize }}" target="_blank" rel="noopener" class="share-btn">x / twitter</a>
+    <a href="https://www.linkedin.com/sharing/share-offsite/?url={{ .Permalink | urlize }}" target="_blank" rel="noopener" class="share-btn">linkedin</a>
+  </div>
 </article>
 </div>
 {{ end }}

@@ -14,6 +14,6 @@ title = "alpernae"
   unsafe = true
 
 [markup.highlight]
-  style            = "monokai"
+  noClasses        = false
   lineNos          = true
   lineNumbersInTable = false
