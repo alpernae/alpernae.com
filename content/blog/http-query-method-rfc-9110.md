@@ -1,6 +1,6 @@
 ---
 title: "QUERY Is Here: HTTP's Biggest Update in Years"
-date: 2026-06-01
+date: 2026-07-23
 tags: ["web", "api"]
 ---
 
