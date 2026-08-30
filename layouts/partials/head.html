@@ -47,5 +47,17 @@
 <!-- stylesheet -->
 <link rel="stylesheet" href="/css/style.css">
 
+<!-- generated tag styles -->
+{{ partial "tag-styles.html" . }}
+
 <!-- theme init (no flash) -->
 <script>(function(){var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);})();</script>
+<script>
+(function(){
+  var mq = window.matchMedia('(prefers-color-scheme: dark)');
+  mq.addEventListener('change', function(e){
+    if(!localStorage.getItem('theme'))
+      document.documentElement.removeAttribute('data-theme');
+  });
+})();
+</script>

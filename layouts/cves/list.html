@@ -8,7 +8,7 @@
 <table class="cve-table">
   <thead>
     <tr>
-      <th>CVE ID</th>
+      <th>CVE / GHSA ID</th>
       <th>vendor / product</th>
       <th>type</th>
       <th>severity</th>
@@ -17,11 +17,17 @@
   </thead>
   <tbody>
     {{ range hugo.Data.cves }}
-    {{ $link := .advisory | default .blog_ref }}
+    {{ $link := .advisory | default .github_advisory | default .blog_ref }}
+    {{ $isGHSA := hasPrefix .id "GHSA" }}
     <tr {{ if $link }}class="cve-row-link" onclick="window.open('{{ $link }}','_blank')" tabindex="0"{{ end }}>
-      <td>
-        {{ if $link }}
+      <td style="white-space:nowrap">
+        {{ if $isGHSA }}
         <a href="{{ $link }}" target="_blank" rel="noopener" class="cve-id" onclick="event.stopPropagation()">{{ .id }}</a>
+        {{ else if $link }}
+        <a href="{{ $link }}" target="_blank" rel="noopener" class="cve-id" onclick="event.stopPropagation()">{{ .id }}</a>
+        {{ if .github_advisory }}
+        <a href="{{ .github_advisory }}" target="_blank" rel="noopener" class="ghsa-badge" onclick="event.stopPropagation()" title="GitHub Security Advisory">GHSA</a>
+        {{ end }}
         {{ else }}
         <span class="cve-id">{{ .id }}</span>
         {{ end }}

@@ -1,7 +1,17 @@
 # Add your CVEs here — they render automatically on /cves
 # severity: critical | high | medium | low
 # advisory: link to external advisory (NVD, vendor, HackerOne report, etc.)
+# github_advisory: https://github.com/advisories/GHSA-xxxx-xxxx-xxxx
 # blog_ref: path to your internal blog post e.g. /blog/my-writeup
+
+- id: "GHSA-hv93-r4j3-q65f"
+  vendor: "OpenClaw"
+  type: "Authorization Bypass Through User-Controlled Key"
+  severity: "High"
+  cvss: "7.1"
+  description: "The issue is not deterministic session keys by itself. The exploitable path was accepting externally supplied sessionKey values on authenticated hook ingress, allowing a hook token holder to route messages into chosen sessions."
+  github_advisory: "https://github.com/advisories/GHSA-hv93-r4j3-q65f"
+  blog_ref: ""
 
 - id: "CVE-2024-40422"
   vendor: "Devika v1"

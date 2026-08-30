@@ -1,0 +1,17 @@
+<style>
+{{ range $tag, $color := .Site.Data.tags.tags }}
+.post-tag.{{ $tag }} {
+  {{ if eq $color "red" }}color: var(--red); border-color: #ff414133;
+  {{ else if eq $color "orange" }}color: var(--orange); border-color: #ff8c0033;
+  {{ else if eq $color "yellow" }}color: var(--yellow); border-color: #ffd70033;
+  {{ else if eq $color "green" }}color: var(--green); border-color: #00ff4133;
+  {{ else if eq $color "blue" }}color: var(--blue); border-color: #00aaff33;
+  {{ else if eq $color "teal" }}color: #00d4aa; border-color: #00d4aa33;
+  {{ else if eq $color "purple" }}color: #a78bfa; border-color: #a78bfa33;
+  {{ else if eq $color "pink" }}color: #f472b6; border-color: #f472b633;
+  {{ else if eq $color "gray" }}color: #555555; border-color: #55555533;
+  {{ else }}color: {{ $color }}; border-color: {{ $color }}33;
+  {{ end }}
+}
+{{ end }}
+</style>

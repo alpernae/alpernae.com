@@ -1,0 +1,57 @@
+# Tag colors — just edit this file, CSS is auto-generated
+# Format: tagname: color
+
+tags:
+  # Vulnerability types
+  vuln: red
+  rce: red
+  sqli: red
+  lfi: red
+  xss: orange
+  xxe: orange
+  cve: orange
+  open-redirect: orange
+  csrf: yellow
+  web: yellow
+
+  # Architecture
+  x64: teal
+  x86: teal
+  i686: teal
+  x86_64: teal
+
+  # Platform
+  linux: orange
+  pardus: yellow
+
+  # Security testing
+  re: blue
+  source-code: blue
+  api: blue
+  python: blue
+  path-traversal: teal
+  idor: teal
+
+  # Languages
+  ruby: "#e05252"
+  javascript: yellow
+
+  # Auth
+  jwt: purple
+
+  # Other
+  bug-bounty: green
+  ssrf: pink
+  mobile: pink
+  ctf: purple
+  deserialization: purple
+  writeup: gray
+  recon: gray
+  osint: gray
+
+# To add a new tag:
+# Just add one line here: tagname: color
+# CSS is auto-generated from this file
+#
+# Color names: red, orange, yellow, green, blue, teal, purple, pink, gray
+# Or hex: "#e05252"
