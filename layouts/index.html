@@ -22,7 +22,7 @@ document.querySelectorAll('#hero-name span:not(.cursor)').forEach(function(s) {
 <p class="bio">
   <span class="prompt">$</span> application security researcher, part-time bug bounty hunter.<br>
   i break things, find what shouldn't be there, and build tools to do it faster.<br>
-  disclosed CVEs · bug bounty · CTFs · ships tools when the itch gets bad enough.
+  CVEs disclosed · bugs reported · tools built when nothing else fits.
 </p>
 
 <div class="tags">
@@ -31,7 +31,6 @@ document.querySelectorAll('#hero-name span:not(.cursor)').forEach(function(s) {
   <span class="tag">mobile security</span>
   <span class="tag">bug bounty</span>
   <span class="tag">exploit dev</span>
-  <span class="tag">CTF</span>
 </div>
 
 <div class="socials">
@@ -61,7 +60,7 @@ document.querySelectorAll('#hero-name span:not(.cursor)').forEach(function(s) {
   {{ end }}
   {{ with .Site.Params.exploitdb }}
   <a href="{{ . }}" target="_blank" rel="noopener">
-    <img src="https://www.exploit-db.com/images/spider-white.png" alt="" aria-hidden="true" width="16" height="16" style="object-fit:contain;flex-shrink:0">
+    <img src="/images/edb-spider.png" alt="" aria-hidden="true" width="20" height="16" class="edb-icon">
     exploit-db
   </a>
   {{ end }}
