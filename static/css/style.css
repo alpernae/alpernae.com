@@ -272,7 +272,6 @@ footer {
   border-collapse: collapse;
   table-layout: fixed;
   font-size: 12px;
-  table-layout: fixed;
 }
 
 .cve-table th {
@@ -295,10 +294,11 @@ footer {
 .cve-table tr:hover td { background: var(--bg1); }
 
 /* column widths */
-.cve-table th:nth-child(1), .cve-table td:nth-child(1) { width: 14%; }
-.cve-table th:nth-child(2), .cve-table td:nth-child(2) { width: 14%; }
+.cve-table th:nth-child(1), .cve-table td:nth-child(1) { width: 13%; }
+.cve-table th:nth-child(2), .cve-table td:nth-child(2) { width: 15%; }
 .cve-table th:nth-child(3), .cve-table td:nth-child(3) { width: 22%; }
-.cve-table th:nth-child(4), .cve-table td:nth-child(4) { width: 11%; }
+.cve-table th:nth-child(4), .cve-table td:nth-child(4) { width: 12%; }
+/* col 5 (description) gets remaining ~38% */
 /* col 5 (description) gets remaining ~39% */
 
 .cve-id { color: var(--green); font-size: 12px; }
