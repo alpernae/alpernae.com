@@ -32,10 +32,13 @@ tags:
   path-traversal: teal
   idor: teal
 
-  # Languages
+  # Programmin Languages
   ruby: "#e05252"
   javascript: yellow
 
+  # Languages
+  TR: red
+  
   # Auth
   jwt: purple
 

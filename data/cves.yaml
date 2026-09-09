@@ -4,6 +4,17 @@
 # github_advisory: https://github.com/advisories/GHSA-xxxx-xxxx-xxxx
 # blog_ref: path to your internal blog post e.g. /blog/my-writeup
 
+
+- id: "CVE-2026-79617"
+  vendor: "TÜBİTAK BİLGEM Software Technologies Research Institute"
+  type: " Incorrect Permission Assignment for Critical Resource"
+  severity: "High"
+  cvss: "7.1"
+  description: "Incorrect Permission Assignment for Critical Resource vulnerability in TÜBİTAK BİLGEM Software Technologies Research Institute Pardus LightDM Greeter allows Exploiting Incorrectly Configured Access Control Security Levels. This issue affects Pardus LightDM Greeter: before 0.4.15."
+  advisory: "https://www.cve.org/CVERecord?id=CVE-2026-79617"
+  blog_ref: "/blog/cve-2026-79617-leading-to-display-exposure/"
+
+
 - id: "GHSA-hv93-r4j3-q65f"
   vendor: "OpenClaw"
   type: "Authorization Bypass Through User-Controlled Key"

@@ -405,6 +405,7 @@ footer {
   margin-bottom: 20px;
   font-size: 13px;
   line-height: 1.6;
+  width: 100%;
   max-width: 100%;
   word-break: normal;
   white-space: pre;
@@ -538,7 +539,9 @@ body { padding-bottom: 36px; }
   border: 1px solid var(--border);
   padding: 20px 24px;
   margin-bottom: 28px;
-  display: flex;
+  display: inline-flex;
+  min-width: 100%;
+  box-sizing: border-box;
   flex-wrap: wrap;
   gap: 20px;
   align-items: flex-start;
